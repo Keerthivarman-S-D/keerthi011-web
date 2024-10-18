@@ -1,16 +1,26 @@
+from flask import Flask, request, jsonify
 import openai
-from apikey import APIKEY
-openai.api_key = APIKEY
 
-output = openai.ChatCompletion.create(
-  model="gpt-3.5-turbo", 
-  messages=[{"role": "user", "content": 
-             "Write me a script for hosting a \
-             conference on technology"}]
-)
+app = Flask(__name__)
 
-# Print out the whole output dictionary
-print(output)
+# Replace with your OpenAI API key
+openai.api_key = 'YOUR_OPENAI_API_KEY'
 
-# Get the output text only
-print(output['choices'][0]['message']['content'])
+@app.route('/generate', methods=['POST'])
+def generate():
+    data = request.json
+    user_prompt = data.get("prompt", "")
+
+    # Generate a response using the OpenAI API
+    output = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[{"role": "user", "content": user_prompt}]
+    )
+    
+    # Extract the output text
+    response_text = output['choices'][0]['message']['content']
+    
+    return jsonify({"response": response_text})
+
+if __name__ == '__main__':
+    app.run(debug=True)
