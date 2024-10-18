@@ -57,6 +57,37 @@
             <p>In addition to web development, I enjoy exploring new technologies, collaborating on innovative projects, and sharing my knowledge with others.</p>
         </div>
     </section>
+    <!-- AI Script Generator Section -->
+<section class="script-generator">
+    <h2>Generate Conference Script</h2>
+    <textarea id="user-prompt" placeholder="Enter your prompt here..." rows="4" cols="50"></textarea><br>
+    <button onclick="generateScript()">Generate Script</button>
+
+    <h3>Generated Script:</h3>
+    <pre id="output"></pre>
+</section>
+
+<script>
+    function generateScript() {
+        const prompt = document.getElementById('user-prompt').value;
+
+        // Make a POST request to the Flask API
+        fetch('http://127.0.0.1:5000/generate', {  // Use the URL where Flask is running
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ prompt: prompt }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('output').innerText = data.response;
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+</script>
 
     <!-- Services Section -->
     <section class="services" id="services">
