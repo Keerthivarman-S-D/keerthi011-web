@@ -299,7 +299,26 @@ p {
     h2 {
         font-size: 3rem;
     }
+/* Chatbot Section */
+#chatling-inline-bot {
+    width: 100%; /* Adjust this as per your design */
+    height: 500px; /* Set height for the chatbot container */
+    border: 2px solid #b74b4b; /* Add a border to match your color theme */
+    border-radius: 8px;
+    margin: 20px auto; /* Center the chatbot */
+    padding: 10px;
+}
 
+/* Media queries for responsiveness */
+@media (max-width: 995px) {
+    #chatling-inline-bot {
+        width: 90%; /* Make it fit better on smaller screens */
+        height: 400px;
+    }
+}
+
+/* Rest of your styles (already provided in your CSS) */
+...
     p {
         font-size: 1.6rem;
     }
